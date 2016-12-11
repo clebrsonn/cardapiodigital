@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+   >
+
+    <TextView
+        android:id="@+id/txtnometemaki"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+    </TextView>
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageviewtemaki"
+        android:layout_marginRight="2sp"
+
+        />
+
+    <TextView
+        android:id="@+id/txtnometemakii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sushi [suchí][1] [2] (em japonês: 寿司, 鮨 ou 鮓) é um prato da culinária japonesa que possui origem numa antiga técnica de conservação da carne de peixe em arroz avinagrado. O sushi, na forma em que é conhecido atualmente, tem cerca de 200 anos; inicialmente, era vendido em barracas, como comida de rua, numa espécie de fast food.">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtnometemaki2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:layout_gravity="end"
+        android:text="R$:7,90"
+        android:textColor="@color/colorPrimary">
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        android:id="@+id/lin">
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Add Pedido"
+        android:id="@+id/buttonAddPedido"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="10dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Fechar Pedido"
+        android:id="@+id/buttonfecharpedido"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"
+
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Ver Pedido"
+        android:id="@+id/buttonPromo"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorPrimary"
+
+        />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
