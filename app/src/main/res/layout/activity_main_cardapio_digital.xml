@@ -22,4 +22,11 @@
         app:headerLayout="@layout/nav_header_main_cardapio_digital"
         app:menu="@menu/activity_main_cardapio_digital_drawer" />
 
+    <!--<ListView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/lst_categoria"-->
+        <!--android:choiceMode="multipleChoice"-->
+        <!--/>-->
+
 </android.support.v4.widget.DrawerLayout>

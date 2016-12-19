@@ -41,6 +41,12 @@
 
     <!--</fragment>-->
 
+    <!--<ListView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/lst_categoria"-->
+        <!--android:choiceMode="multipleChoice"-->
+        <!--/>-->
 
 
 </android.support.design.widget.CoordinatorLayout>

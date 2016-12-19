@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,15 +20,25 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.GarconServico;
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Garcon;
 
 public class CardapioDigitalMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+        Garcon garcon;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main_cardapio_digital);
+
+        garcon = (Garcon) getIntent().getSerializableExtra("garcon");
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,18 +67,23 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
         ListView listCategoria = (ListView) findViewById(R.id.lst_categoria);
         //arraayadapter para lista
-        ArrayList<String> listacategoriaarray = new ArrayList<String>();
+        List<Garcon> listacategoriaarray;
         //chamando funcao para preencher a lista
         listacategoriaarray = preencherDados();
-        //associando o adapter a um layout e passando por parametro a lista
-        ArrayAdapter<String> arrayadapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_checked,listacategoriaarray);
-        listCategoria.setAdapter(arrayadapter);
-        //botão de apbir pedido
-        //  Button bt =(Button)findViewById(R.id.mesa);
 
-        //final para poder passar por parametro no toast
-        final ArrayList<String> finalListacategoriaarray = listacategoriaarray;
+        //associando o adapter a um layout e passando por parametro a lista
+        ArrayAdapter<Garcon> arrayadapter = new ArrayAdapter<Garcon>(this,android.R.layout.simple_list_item_checked,listacategoriaarray);
+        listCategoria.setAdapter(arrayadapter);
+       // botão de apbir pedido
+//          Button bt =(Button)findViewById(R.id.mesa);
+
+      //  final para poder passar por parametro no toast
+        final List<Garcon> finalListacategoriaarray = listacategoriaarray;
         listCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+//            garconadapter = new GarconAdapter(, null);
+//            listview.setAdapter(garconadapter);
 
 
             @Override
@@ -75,7 +91,9 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
                 String categoriaEscolhida = finalListacategoriaarray.get(position).toString();
 
-                Toast.makeText(getApplicationContext(), "Categoria:" + categoriaEscolhida, Toast.LENGTH_LONG).show();
+                Log.d("finalcategoria",categoriaEscolhida);
+
+                Toast.makeText(CardapioDigitalMainActivity.this, "Categoria:" + categoriaEscolhida, Toast.LENGTH_LONG).show();
                 {
 
 
@@ -155,6 +173,8 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Log.d("id navegation", String.valueOf(id));
+
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_galleryy) {
@@ -179,24 +199,21 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
     }
 
 
-    private final  ArrayList<String> preencherDados(){
+    private final List<Garcon> preencherDados(){
 
-        ArrayList<String> dados = new ArrayList<String>();
-
-        GarconServico gs = new GarconServico();
-        String json = gs.ObterListagemGarcon();
-
-//       List<GarconServico> listgarconServico = new ArrayList<>();
-        System.out.print("lalallal"+json);
-
-        dados.add(json.toString());
-        dados.add("Combos");
-        dados.add("Sobremesas");
-        dados.add("Sushi");
-        dados.add("Temakis");
+        Garcon g2 = new Garcon();
+        g2.setId(12365444);
+        g2.setNomegarcon("seilaoque");
+        g2.setSenhagarcon("14gfdd52");
 
 
-        return dados;
+        List<Garcon> lista = new ArrayList<>();
+
+        lista.add(g2);
+        lista.add(garcon);
+
+
+        return lista;
     }
 
 

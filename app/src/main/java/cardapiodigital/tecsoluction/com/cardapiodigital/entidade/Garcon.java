@@ -1,4 +1,4 @@
-package cardapiodigital.tecsoluction.com.cardapiodigital.cardapiodigital.tecsoluction.com.cardapiodigital.entidade;
+package cardapiodigital.tecsoluction.com.cardapiodigital.entidade;
 
 import java.io.Serializable;
 
@@ -7,11 +7,14 @@ import java.io.Serializable;
  */
 public class Garcon implements Serializable{
 
+
+    private static final long serialVersionUID = 1L;
+
     private long id;
 
-    private String nomegarcon;
+    private String nome;
 
-    private String senhagarcon;
+    private String senha;
 
 
     // construtor
@@ -29,26 +32,24 @@ public class Garcon implements Serializable{
     }
 
     public String getNomegarcon() {
-        return nomegarcon;
+        return nome;
     }
 
     public void setNomegarcon(String nomegarcon) {
-        this.nomegarcon = nomegarcon;
+        this.nome = nomegarcon;
     }
 
     public String getSenhagarcon() {
-        return senhagarcon;
+        return senha;
     }
 
     public void setSenhagarcon(String senhagarcon) {
-        this.senhagarcon = senhagarcon;
+        this.senha = senhagarcon;
     }
 
 
     @Override
     public String toString() {
-        return "Garcon{" +
-                "nomegarcon='" + nomegarcon + '\'' +
-                '}';
+        return nome;
     }
 }

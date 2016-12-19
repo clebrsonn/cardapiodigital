@@ -22,9 +22,25 @@ public class GarconColunas implements BaseColumns {
 
 
     private static final String TEXT_TYPE = " TEXT";
-       private static final String DOUBLE_TYPE = " DOUBLE";
+    private static final String DOUBLE_TYPE = " DOUBLE";
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
+
+
+
+
+    public static final String[] ALL_COLUMNS = new String[] {
+            _ID,
+            COLUMN_NAME_ID ,
+            COLUMN_NAME_NOME_GARCON  ,
+            COLUMN_NAME_SENHA_GARCON ,
+           /* COL_INTENSITY,
+            COL_KEYWORDS ,
+            COL_MOD      ,
+            COL_ICONE*/
+    };
+
+
 
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -38,8 +54,6 @@ public class GarconColunas implements BaseColumns {
 
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
-
-
 
 
 
