@@ -12,13 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ConsumirJsonGarconActivity"
+        <activity android:name=".servicos.ConsumirJsonGarconActivity"
             android:label="@string/app_name"
             android:icon="@mipmap/ic_launcher"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
 
@@ -32,6 +31,12 @@
             android:name="cardapiodigital.tecsoluction.com.cardapiodigital.CardapioDigitalMainActivity"
             android:icon="@mipmap/ic_launcher"
             android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
 
         </activity>
 

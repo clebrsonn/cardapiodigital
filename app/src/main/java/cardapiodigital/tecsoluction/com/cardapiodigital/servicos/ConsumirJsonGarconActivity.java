@@ -1,4 +1,4 @@
-package cardapiodigital.tecsoluction.com.cardapiodigital;
+package cardapiodigital.tecsoluction.com.cardapiodigital.servicos;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -18,9 +18,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import cardapiodigital.tecsoluction.com.cardapiodigital.CardapioDigitalMainActivity;
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Garcon;
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
@@ -47,11 +49,11 @@ public class ConsumirJsonGarconActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        Garcon garcon = (Garcon) l.getAdapter().getItem(position);
-
-        Intent intent = new Intent(ConsumirJsonGarconActivity.this, CardapioDigitalMainActivity.class);
-        intent.putExtra("garcon", garcon);
-        startActivity(intent);
+//        Garcon garcon = (Garcon) l.getAdapter().getItem(position);
+//
+//        Intent intent = new Intent(ConsumirJsonGarconActivity.this, CardapioDigitalMainActivity.class);
+//        intent.putExtra("garcon", garcon);
+//        startActivity(intent);
 
 
 
@@ -84,7 +86,10 @@ public class ConsumirJsonGarconActivity extends ListActivity {
                     instream.close();
                     List<Garcon> garcons = getGarcons(json);
 
-
+                    Intent intent = new Intent(ConsumirJsonGarconActivity.this, CardapioDigitalMainActivity.class);
+                    intent.putExtra("garcons", (Serializable) garcons);
+                    finish();
+                    startActivity(intent);
 
 
                     return garcons;

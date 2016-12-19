@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Garcon;
@@ -27,6 +26,7 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Garcon;
 public class CardapioDigitalMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
         Garcon garcon;
+        List<Garcon> garcons=null;
 
 
 
@@ -38,11 +38,10 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
         setContentView(R.layout.activity_main_cardapio_digital);
 
         garcon = (Garcon) getIntent().getSerializableExtra("garcon");
-
+//        garcons = (List<Garcon>) getIntent().getSerializableExtra("garcons");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -201,19 +200,21 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
     private final List<Garcon> preencherDados(){
 
-        Garcon g2 = new Garcon();
-        g2.setId(12365444);
-        g2.setNomegarcon("seilaoque");
-        g2.setSenhagarcon("14gfdd52");
+//        Garcon g2 = new Garcon();
+//        g2.setId(12365444);
+//        g2.setNomegarcon("seilaoque");
+//        g2.setSenhagarcon("14gfdd52");
+
+//
+        garcons = (List<Garcon>) getIntent().getSerializableExtra("garcons");
+
+//        List<Garcon> lista = new ArrayList<>();
+////
+////        lista.add(g2);
+//        lista.add(garcon);
 
 
-        List<Garcon> lista = new ArrayList<>();
-
-        lista.add(g2);
-        lista.add(garcon);
-
-
-        return lista;
+        return garcons;
     }
 
 
