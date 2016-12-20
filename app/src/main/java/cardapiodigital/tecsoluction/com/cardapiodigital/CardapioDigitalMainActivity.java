@@ -21,12 +21,12 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Garcon;
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Categoria;
 
 public class CardapioDigitalMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-        Garcon garcon;
-        List<Garcon> garcons=null;
+        Categoria categoria;
+        List<Categoria> categorias=null;
 
 
 
@@ -37,8 +37,8 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
         setContentView(R.layout.activity_main_cardapio_digital);
 
-        garcon = (Garcon) getIntent().getSerializableExtra("garcon");
-//        garcons = (List<Garcon>) getIntent().getSerializableExtra("garcons");
+        categoria = (Categoria) getIntent().getSerializableExtra("categoria");
+       categorias= (List<Categoria>) getIntent().getSerializableExtra("categorias");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,18 +66,18 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
         ListView listCategoria = (ListView) findViewById(R.id.lst_categoria);
         //arraayadapter para lista
-        List<Garcon> listacategoriaarray;
+        List<Categoria> listacategoriaarray;
         //chamando funcao para preencher a lista
         listacategoriaarray = preencherDados();
 
         //associando o adapter a um layout e passando por parametro a lista
-        ArrayAdapter<Garcon> arrayadapter = new ArrayAdapter<Garcon>(this,android.R.layout.simple_list_item_checked,listacategoriaarray);
+        ArrayAdapter<Categoria> arrayadapter = new ArrayAdapter<Categoria>(this,android.R.layout.simple_list_item_checked,listacategoriaarray);
         listCategoria.setAdapter(arrayadapter);
        // botão de apbir pedido
 //          Button bt =(Button)findViewById(R.id.mesa);
 
       //  final para poder passar por parametro no toast
-        final List<Garcon> finalListacategoriaarray = listacategoriaarray;
+        final List<Categoria> finalListacategoriaarray = listacategoriaarray;
         listCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
@@ -198,7 +198,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
     }
 
 
-    private final List<Garcon> preencherDados(){
+    private final List<Categoria> preencherDados(){
 
 //        Garcon g2 = new Garcon();
 //        g2.setId(12365444);
@@ -206,7 +206,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 //        g2.setSenhagarcon("14gfdd52");
 
 //
-        garcons = (List<Garcon>) getIntent().getSerializableExtra("garcons");
+  //      categorias = (List<Categoria>) getIntent().getSerializableExtra("categorias");
 
 //        List<Garcon> lista = new ArrayList<>();
 ////
@@ -214,7 +214,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 //        lista.add(garcon);
 
 
-        return garcons;
+        return categorias;
     }
 
 
