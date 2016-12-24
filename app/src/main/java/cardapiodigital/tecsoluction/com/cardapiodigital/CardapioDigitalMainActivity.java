@@ -97,10 +97,10 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
                 Log.d("finalcategoria",categoriaEscolhida);
 
-//                long idcategoria = listacategoriaarray.get(position).getId();
-//
+//                long idcategoria = categorias.get(position).getId();
+////
 //                String ide = String.valueOf(idcategoria);
-//
+////
 //                Log.d("idcategoria",ide);
 
                 Toast.makeText(CardapioDigitalMainActivity.this, "Categoria:" + categoriaEscolhida, Toast.LENGTH_LONG).show();
@@ -112,7 +112,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 0:
 
                             Intent it = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it.putExtra("idcategoria",10L);
+                            it.putExtra("idcategoria",12l);
                             startActivity(it);
 
                           //  Log.d("passou intent main",produtos.toString());
