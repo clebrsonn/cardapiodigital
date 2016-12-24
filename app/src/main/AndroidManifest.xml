@@ -43,8 +43,14 @@
 
         <activity android:name=".servicos.ConsumirJsonGarconActivity"
             android:label="@string/app_name"
-            android:icon="@mipmap/ic_launcher"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:icon="@mipmap/ic_launcher">
+
+        </activity>
+
+
+        <activity android:name=".servicos.ConsumirJsonProdutoActivity"
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher">
 
         </activity>
 

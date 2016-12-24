@@ -62,8 +62,8 @@ public class ConsumirJsonCategoriaActivity extends Activity  {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = ProgressDialog.show(ConsumirJsonCategoriaActivity.this, "Aguarde",
-                    "Fazendo download do JSON");
+//            dialog = ProgressDialog.show(ConsumirJsonCategoriaActivity.this, "Aguarde",
+//                    "Fazendo download do JSON");
         }
 
         //Acessa o serviço do JSON e retorna a lista de pessoas
@@ -101,7 +101,7 @@ public class ConsumirJsonCategoriaActivity extends Activity  {
         @Override
         protected void onPostExecute(List<Categoria> result) {
             super.onPostExecute(result);
-            dialog.dismiss();
+//            dialog.dismiss();
             if (result.size() > 0) {
 
 

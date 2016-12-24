@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splash"
     tools:context=".servicos.ConsumirJsonCategoriaActivity">
 
 
-    <ImageView android:id="@+id/logo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/splash">
-    </ImageView>
+    <!--<ImageView android:id="@+id/logo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@drawable/splash">-->
+    <!--</ImageView>-->
 
 
 </RelativeLayout>

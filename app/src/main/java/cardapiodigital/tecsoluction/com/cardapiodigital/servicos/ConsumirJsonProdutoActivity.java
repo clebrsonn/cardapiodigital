@@ -1,14 +1,10 @@
 package cardapiodigital.tecsoluction.com.cardapiodigital.servicos;
 
-import android.app.ListActivity;
-import android.app.ProgressDialog;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,8 +18,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import cardapiodigital.tecsoluction.com.cardapiodigital.CardapioDigitalMainActivity;
-import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Garcon;
+import cardapiodigital.tecsoluction.com.cardapiodigital.Sushi;
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -35,32 +31,25 @@ import static android.app.AlertDialog.Builder;
 /**
  * Created by winds on 17/12/2016.
  */
-public class ConsumirJsonGarconActivity extends ListActivity {
+public class ConsumirJsonProdutoActivity extends Activity {
+
+    private long idcategoria;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        idcategoria = (Long) getIntent().getSerializableExtra("idcategoria");
         new DownloadJsonAsyncTask()
-                .execute("https://murmuring-waters-97180.herokuapp.com/garcon");
+                .execute("https://murmuring-waters-97180.herokuapp.com/produto/categoria/"+idcategoria);
     }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-//        Garcon garcon = (Garcon) l.getAdapter().getItem(position);
-//
-//        Intent intent = new Intent(ConsumirJsonGarconActivity.this, CardapioDigitalMainActivity.class);
-//        intent.putExtra("garcon", garcon);
-//        startActivity(intent);
 
 
+    class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Produto>> {
 
-    }
-
-    class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Garcon>> {
-        ProgressDialog dialog;
+      //  ProgressDialog dialog;
 
         //Exibe pop-up indicando que está sendo feito o download do JSON
         @Override
@@ -72,7 +61,7 @@ public class ConsumirJsonGarconActivity extends ListActivity {
 
         //Acessa o serviço do JSON e retorna a lista de pessoas
         @Override
-        protected List<Garcon> doInBackground(String... params) {
+        protected List<Produto> doInBackground(String... params) {
             String urlString = params[0];
             HttpClient httpclient = new DefaultHttpClient();
             HttpGet httpget = new HttpGet(urlString);
@@ -84,18 +73,18 @@ public class ConsumirJsonGarconActivity extends ListActivity {
                     InputStream instream = entity.getContent();
                     String json = getStringFromInputStream(instream);
                     instream.close();
-                    List<Garcon> garcons = getGarcons(json);
+                    List<Produto> produtos = getProdutos(json);
 
-                    Intent intent = new Intent(ConsumirJsonGarconActivity.this, CardapioDigitalMainActivity.class);
-                    intent.putExtra("garcons", (Serializable) garcons);
+                    Intent intent = new Intent(ConsumirJsonProdutoActivity.this, Sushi.class);
+                    intent.putExtra("produtos", (Serializable) produtos);
                     finish();
                     startActivity(intent);
 
 
-                    return garcons;
+                    return produtos;
                 }
             } catch (Exception e) {
-                Log.e("Erro", "Falha ao acessar Web service", e);
+                Log.e("Erro", "Falha ao acessar Web service produtos", e);
             }
             return null;
         }
@@ -103,17 +92,17 @@ public class ConsumirJsonGarconActivity extends ListActivity {
 
         //Depois de executada a chamada do serviço
         @Override
-        protected void onPostExecute(List<Garcon> result) {
+        protected void onPostExecute(List<Produto> result) {
             super.onPostExecute(result);
 //            dialog.dismiss();
             if (result.size() > 0) {
-                ArrayAdapter<Garcon> adapter = new ArrayAdapter<Garcon>(
-                        ConsumirJsonGarconActivity.this,
-                        android.R.layout.simple_list_item_1, result);
-                setListAdapter(adapter);
+//                ArrayAdapter<Produto> adapter = new ArrayAdapter<Produto>(
+//                        ConsumirJsonProdutoActivity.this,
+//                        android.R.layout.simple_list_item_1, result);
+//                setListAdapter(adapter);
             } else {
                 Builder builder = new Builder(
-                        ConsumirJsonGarconActivity.this)
+                        ConsumirJsonProdutoActivity.this)
                         .setTitle("Erro")
                         .setMessage("Não foi possível acessar as informações!!")
                         .setPositiveButton("OK", null);
@@ -122,28 +111,30 @@ public class ConsumirJsonGarconActivity extends ListActivity {
         }
 
         //Retorna uma lista de pessoas com as informações retornadas do JSON
-        public List<Garcon> getGarcons(String jsonString) throws JSONException {
-            List<Garcon> garcons = new ArrayList<Garcon>();
+        public List<Produto> getProdutos(String jsonString) throws JSONException {
+            List<Produto> produtos = new ArrayList<Produto>();
             try {
-                JSONArray garconsJson = new JSONArray(jsonString);
-                JSONObject garcon;
+                JSONArray produtosJson = new JSONArray(jsonString);
+                JSONObject produto;
 
-                for (int i = 0; i < garconsJson.length(); i++) {
-                    garcon = new JSONObject(garconsJson.getString(i));
-                    Log.i("GARCON ENCONTRADO: ",
-                            "nome=" + garcon.getString("nome"));
+                for (int i = 0; i < produtosJson.length(); i++) {
+                    produto = new JSONObject(produtosJson.getString(i));
+                    Log.i("Produto ENCONTRADO: ",
+                            "nome=" + produto.getString("descricao"));
 
-                    Garcon objetoGarcon = new Garcon();
-                    objetoGarcon.setNomegarcon(garcon.getString("nome"));
-                    objetoGarcon.setSenhagarcon(garcon.getString("senha"));
-                    garcons.add(objetoGarcon);
+                    Produto objetoProduto = new Produto();
+                    objetoProduto.setCodebar(produto.getString("codebar"));
+                    objetoProduto.setDescricao(produto.getString("descricao"));
+                    objetoProduto.setPrecoVenda(produto.getDouble("precoVenda"));
+                  //  objetoProduto.setCategoria(produto.get("categoria"));
+                    produtos.add(objetoProduto);
 
                 }
 
             } catch (JSONException e) {
-                Log.e("Erro", "Erro no parsing do JSON", e);
+                Log.e("Erro", "Erro no parsing do JSON objetoProduto", e);
             }
-            return garcons;
+            return produtos;
         }
 
 

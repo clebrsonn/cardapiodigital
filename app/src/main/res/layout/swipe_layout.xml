@@ -7,7 +7,7 @@
    >
 
     <TextView
-        android:id="@+id/txtnometemaki"
+        android:id="@+id/txtnumeropagina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
@@ -18,13 +18,13 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageviewtemaki"
+        android:id="@+id/imageviewproduto"
         android:layout_marginRight="2sp"
 
         />
 
     <TextView
-        android:id="@+id/txtnometemakii"
+        android:id="@+id/txtprodutodescricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sushi [suchí][1] [2] (em japonês: 寿司, 鮨 ou 鮓) é um prato da culinária japonesa que possui origem numa antiga técnica de conservação da carne de peixe em arroz avinagrado. O sushi, na forma em que é conhecido atualmente, tem cerca de 200 anos; inicialmente, era vendido em barracas, como comida de rua, numa espécie de fast food.">
@@ -32,7 +32,7 @@
     </TextView>
 
     <TextView
-        android:id="@+id/txtnometemaki2"
+        android:id="@+id/txtprodutopreco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="40sp"

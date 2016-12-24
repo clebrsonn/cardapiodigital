@@ -11,7 +11,6 @@ public class Categoria implements Serializable {
 
     private long id;
 
-
     private String nome;
 
     private Categoria catpai;

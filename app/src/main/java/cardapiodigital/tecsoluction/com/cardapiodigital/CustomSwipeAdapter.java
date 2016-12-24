@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
+
 /**
  * Created by winds on 15/05/2016.
  */
@@ -21,7 +25,11 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
     private LayoutInflater layoutinflater;
 
+    private List<Produto> listaProduto= null;
 
+
+
+    //construtor
     public CustomSwipeAdapter(Context ctx){
 
         this.contexo=ctx;
@@ -29,10 +37,18 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
     }
 
+    public CustomSwipeAdapter(Context ctx, List<Produto> listaProd){
+
+        this.contexo=ctx;
+        this.listaProduto = listaProd;
+
+
+    }
+
 
     @Override
     public int getCount() {
-        return images_resources.length;
+        return listaProduto.size();
     }
 
 
@@ -46,14 +62,23 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
         layoutinflater = (LayoutInflater)contexo.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView =layoutinflater.inflate(R.layout.swipe_layout,container,false);
-        TextView nome =(TextView)itemView.findViewById(R.id.txtnometemaki);
-        ImageView img = (ImageView)itemView.findViewById(R.id.imageviewtemaki);
+
+        TextView numero =(TextView)itemView.findViewById(R.id.txtnumeropagina);
+        ImageView img = (ImageView)itemView.findViewById(R.id.imageviewproduto);
+        TextView descricao =(TextView)itemView.findViewById(R.id.txtprodutodescricao);
+        TextView preco =(TextView)itemView.findViewById(R.id.txtprodutopreco);
+
+
+
+
         Button btAdd = (Button) itemView.findViewById(R.id.buttonAddPedido);
         Button btFechar = (Button) itemView.findViewById(R.id.buttonfecharpedido);
         Button btPromo = (Button) itemView.findViewById(R.id.buttonPromo);
 
         img.setImageResource(images_resources[position]);
-        nome.setText(":"+ position);
+        numero.setText(":"+ position);
+        descricao.setText(":" + listaProduto.get(position).getDescricao().toString());
+        preco.setText(":"+ listaProduto.get(position).getPrecoVenda());
         container.addView(itemView);
 
 
