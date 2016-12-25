@@ -18,8 +18,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import cardapiodigital.tecsoluction.com.cardapiodigital.Sushi;
-import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
+import cardapiodigital.tecsoluction.com.cardapiodigital.MesasActivity;
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Mesa;
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -31,25 +31,20 @@ import static android.app.AlertDialog.Builder;
 /**
  * Created by winds on 17/12/2016.
  */
-public class ConsumirJsonProdutoActivity extends Activity {
-
-    private long idcategoria;
+public class ConsumirJsonMesaActivity extends Activity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        idcategoria = (Long) getIntent().getSerializableExtra("idcategoria");
         new DownloadJsonAsyncTask()
-                .execute("https://murmuring-waters-97180.herokuapp.com/produto/categoria/"+idcategoria);
+                .execute("https://murmuring-waters-97180.herokuapp.com/mesa");
     }
 
 
 
-    class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Produto>> {
-
-      //  ProgressDialog dialog;
+    class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Mesa>> {
+       // ProgressDialog dialog;
 
         //Exibe pop-up indicando que está sendo feito o download do JSON
         @Override
@@ -61,7 +56,7 @@ public class ConsumirJsonProdutoActivity extends Activity {
 
         //Acessa o serviço do JSON e retorna a lista de pessoas
         @Override
-        protected List<Produto> doInBackground(String... params) {
+        protected List<Mesa> doInBackground(String... params) {
             String urlString = params[0];
             HttpClient httpclient = new DefaultHttpClient();
             HttpGet httpget = new HttpGet(urlString);
@@ -73,18 +68,18 @@ public class ConsumirJsonProdutoActivity extends Activity {
                     InputStream instream = entity.getContent();
                     String json = getStringFromInputStream(instream);
                     instream.close();
-                    List<Produto> produtos = getProdutos(json);
+                    List<Mesa> mesas = getMesas(json);
 
-                    Intent intent = new Intent(ConsumirJsonProdutoActivity.this, Sushi.class);
-                    intent.putExtra("produtos", (Serializable) produtos);
+                    Intent intent = new Intent(ConsumirJsonMesaActivity.this, MesasActivity.class);
+                    intent.putExtra("mesas", (Serializable) mesas);
                     finish();
                     startActivity(intent);
 
 
-                    return produtos;
+                    return mesas;
                 }
             } catch (Exception e) {
-                Log.e("Erro", "Falha ao acessar Web service produtos", e);
+                Log.e("Erro", "Falha ao acessar Web service Mesa", e);
             }
             return null;
         }
@@ -92,51 +87,49 @@ public class ConsumirJsonProdutoActivity extends Activity {
 
         //Depois de executada a chamada do serviço
         @Override
-        protected void onPostExecute(List<Produto> result) {
+        protected void onPostExecute(List<Mesa> result) {
             super.onPostExecute(result);
 //            dialog.dismiss();
             if (result.size() > 0) {
-//                ArrayAdapter<Produto> adapter = new ArrayAdapter<Produto>(
-//                        ConsumirJsonProdutoActivity.this,
+//                ArrayAdapter<Mesa> adapter = new ArrayAdapter<Mesa>(
+//                        ConsumirJsonMesaActivity.this,
 //                        android.R.layout.simple_list_item_1, result);
 //                setListAdapter(adapter);
             } else {
                 Builder builder = new Builder(
-                        ConsumirJsonProdutoActivity.this)
+                        ConsumirJsonMesaActivity.this)
                         .setTitle("Erro")
-                        .setMessage("Não foi possível acessar as informações!!")
+                        .setMessage("Não foi possível acessar as informações Mesa!!")
                         .setPositiveButton("OK", null);
                 builder.create().show();
             }
         }
 
         //Retorna uma lista de pessoas com as informações retornadas do JSON
-        public List<Produto> getProdutos(String jsonString) throws JSONException {
-            List<Produto> produtos = new ArrayList<Produto>();
+        public List<Mesa> getMesas(String jsonString) throws JSONException {
+            List<Mesa> mesas = new ArrayList<Mesa>();
             try {
-                JSONArray produtosJson = new JSONArray(jsonString);
-                JSONObject produto;
+                JSONArray mesasJson = new JSONArray(jsonString);
+                JSONObject mesa;
 
-                for (int i = 0; i < produtosJson.length(); i++) {
-                    produto = new JSONObject(produtosJson.getString(i));
-                    Log.i("Produto ENCONTRADO: ",
-                            "nome=" + produto.getString("descricao"));
+                for (int i = 0; i < mesasJson.length(); i++) {
+                    mesa = new JSONObject(mesasJson.getString(i));
+                    Log.i("mesa ENCONTRADO: ",
+                            "nome=" + mesa.getString("numero"));
 
-                    Produto objetoProduto = new Produto();
-                    objetoProduto.setId(produto.getLong("id"));
-                  //  objetoProduto.setCodebar(produto.getString("codebar"));
-                    objetoProduto.setCodebar(produto.getString("codebar"));
-                    objetoProduto.setDescricao(produto.getString("descricao"));
-                    objetoProduto.setPrecoVenda(produto.getDouble("precoVenda"));
-                  //  objetoProduto.setCategoria(produto.get("categoria"));
-                    produtos.add(objetoProduto);
+                    Mesa objetoMesa = new Mesa();
+                    objetoMesa.setId(mesa.getLong("id"));
+                    objetoMesa.setNumero(mesa.getString("numero"));
+                    objetoMesa.setStatus(mesa.getString("status"));
+
+                    mesas.add(objetoMesa);
 
                 }
 
             } catch (JSONException e) {
-                Log.e("Erro", "Erro no parsing do JSON objetoProduto", e);
+                Log.e("Erro", "Erro no parsing do JSON Mesa", e);
             }
-            return produtos;
+            return mesas;
         }
 
 

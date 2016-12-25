@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_pedido"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cardapiodigital.tecsoluction.com.cardapiodigital.PedidoActivity"
+    tools:showIn="@layout/activity_pedido">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtnumeropedidox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Numero Pedido"
+            android:layout_marginRight="2sp"
+
+
+            >
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/txtnumeropedidovx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxx"
+            android:layout_marginRight="2sp"
+
+            >
+
+        </TextView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtprodutonomex"
+            android:text="Tipo de Pedido"
+            android:layout_marginRight="2sp"
+
+            />
+
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/comboTipoPedido"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtprodutonomevx"
+            android:layout_marginRight="2sp"
+            android:text="Status Pedido"
+            />
+
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/comboStatusPedido"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtclientenome"
+        android:layout_marginRight="2sp"
+        android:text="Cliente :"
+        />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/comboCliente"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtmesa"
+        android:layout_marginRight="2sp"
+        android:text="Mesa :"
+        />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/comboMesa"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+
+        />
+
+
+
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicione outro Item"
+        android:pointerIcon="horizontal_double_arrow"/>
+
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimaryDark"-->
+        <!--android:src="@drawable/additempedido"/>-->
+
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="@dimen/activity_horizontal_margin">
+
+    <!--<TextView-->
+        <!--android:id="@+id/txtnumeropedido"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Numero Pedido"-->
+
+        <!--&gt;-->
+
+    <!--</TextView>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/txtnumeropedidov"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="xxxx"-->
+        <!--&gt;-->
+
+    <!--</TextView>-->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtprodutonome"
+        android:text="Item :"
+        android:layout_marginRight="2sp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtprodutonomev"
+        android:layout_marginRight="2sp"
+        android:text="budweiser"
+        />
+
+
+    <TextView
+        android:id="@+id/txtprodutopreco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Preço :"
+        android:textColor="@color/colorPrimary">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtprodutoprecov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="7,90"
+        android:textColor="@color/colorPrimaryDark">
+
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/txtprodutoqtd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Qtd"
+        android:textColor="@color/colorPrimary">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/txtprodutoqtdv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_gravity="end"
+        android:textColor="@color/colorPrimary"
+        >
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/txtprodutoprecoo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Subtotal :"
+        android:textColor="@color/colorPrimary">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtprodutoprecovv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="24,90"
+        android:textColor="@color/colorPrimaryDark">
+
+    </TextView>
+
+</LinearLayout>
+
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/pesquisarItem"-->
+        <!--android:src="@drawable/ic_menu_send"/>-->
+
+
+
+
+
+
+
+</LinearLayout>

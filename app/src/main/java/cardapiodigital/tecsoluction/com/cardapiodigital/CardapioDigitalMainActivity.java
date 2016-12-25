@@ -23,6 +23,7 @@ import java.util.List;
 
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Categoria;
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
+import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonMesaActivity;
 import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonProdutoActivity;
 
 public class CardapioDigitalMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,6 +55,11 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                Intent it = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonMesaActivity.class);
+                startActivity(it);
+
+
             }
         });
 
@@ -97,10 +103,10 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
                 Log.d("finalcategoria",categoriaEscolhida);
 
-//                long idcategoria = categorias.get(position).getId();
-////
+  //              long idcategoria = listacategoriaarray.get(position).getId();
+//
 //                String ide = String.valueOf(idcategoria);
-////
+//
 //                Log.d("idcategoria",ide);
 
                 Toast.makeText(CardapioDigitalMainActivity.this, "Categoria:" + categoriaEscolhida, Toast.LENGTH_LONG).show();
@@ -112,7 +118,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 0:
 
                             Intent it = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it.putExtra("idcategoria",12l);
+                            it.putExtra("idcategoria",10L);
                             startActivity(it);
 
                           //  Log.d("passou intent main",produtos.toString());

@@ -1,6 +1,7 @@
 package cardapiodigital.tecsoluction.com.cardapiodigital;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,19 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
 
         Button btAdd = (Button) itemView.findViewById(R.id.buttonAddPedido);
+        btAdd.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View view) {
+
+                Intent it = new Intent(view.getContext(), PedidoActivity.class);
+//        it.putExtra("idcategoria",10L);
+                contexo.startActivity(it);
+
+            }
+        });
+
         Button btFechar = (Button) itemView.findViewById(R.id.buttonfecharpedido);
         Button btPromo = (Button) itemView.findViewById(R.id.buttonPromo);
 
@@ -91,4 +105,16 @@ public class CustomSwipeAdapter extends PagerAdapter {
         object = new Object();
 
     }
+
+//    public void AddPedido(ViewGroup container, int position, Object object) {
+//        container.removeView((LinearLayout)object);
+//        object = new Object();
+//
+//
+//        Intent it = new Intent(container.getContext(), PedidoActivity.class);
+////        it.putExtra("idcategoria",10L);
+//        contexo.startActivity(it);
+//        Log.d("passou sushiswper",object.toString());
+//
+//    }
 }

@@ -58,6 +58,7 @@
         android:id="@+id/buttonAddPedido"
         android:textColor="@color/colorPrimaryDark"
         android:layout_margin="10dp"
+        android:onClick="AddPedido()"
         />
     <Button
         android:layout_width="wrap_content"
@@ -66,6 +67,8 @@
         android:id="@+id/buttonfecharpedido"
         android:layout_margin="10dp"
         android:textColor="@color/colorPrimary"
+        android:onClick="FecharPedido"
+
 
         />
 
@@ -77,6 +80,8 @@
         android:id="@+id/buttonPromo"
         android:layout_margin="10dp"
         android:textColor="@color/colorPrimary"
+        android:onClick="verPedido"
+
 
         />
 
