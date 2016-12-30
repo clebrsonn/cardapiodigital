@@ -14,7 +14,7 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Mesa;
 
 public class MesasActivity extends AppCompatActivity {
 
-    private int[] images_resources={R.drawable.mesaasair,R.drawable.mesa,R.drawable.mesaocupada,R.drawable.mesa,R.drawable.mesaasair};
+        private int[] images_resources={R.drawable.mesaa,R.drawable.mesaa,R.drawable.mesaa,R.drawable.mesaa,R.drawable.mesaa};
 
     List<Mesa> mesas;
 
@@ -35,6 +35,8 @@ public class MesasActivity extends AppCompatActivity {
         Toolbar toolbar = new Toolbar(this);
       //  setSupportActionBar(toolbar);
         layout.addView(toolbar);
+
+
 
         mesas = (List<Mesa>) getIntent().getSerializableExtra("mesas");
 

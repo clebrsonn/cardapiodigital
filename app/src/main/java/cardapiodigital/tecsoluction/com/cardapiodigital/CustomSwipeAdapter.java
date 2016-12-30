@@ -20,7 +20,7 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
  */
 public class CustomSwipeAdapter extends PagerAdapter {
 
-    private int[] images_resources={R.drawable.mesaasair,R.drawable.mesa,R.drawable.mesaocupada,R.drawable.logoperfil};
+    private int[] images_resources={R.drawable.refrigerante,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
 
     private Context contexo;
 
