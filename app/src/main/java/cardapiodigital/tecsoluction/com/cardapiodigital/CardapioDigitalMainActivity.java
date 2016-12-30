@@ -118,7 +118,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 0:
 
                             Intent it = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it.putExtra("idcategoria",10L);
+                            it.putExtra("idcategoria",7L);
                             startActivity(it);
 
                           //  Log.d("passou intent main",produtos.toString());
@@ -135,7 +135,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 1:
 
                             Intent ittt = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            ittt.putExtra("idcategoria",10L);
+                            ittt.putExtra("idcategoria",6L);
 
                             startActivity(ittt);
 
@@ -148,56 +148,56 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 2:
 
                             Intent it3 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it3.putExtra("idcategoria",12L);
+                            it3.putExtra("idcategoria",7L);
 
                             startActivity(it3);
                             break;
 
                         case 3:
                             Intent it4 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it4.putExtra("idcategoria",12L);
+                            it4.putExtra("idcategoria",6L);
 
                             startActivity(it4);
                             break;
 
                         case 4:
                             Intent it5 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it5.putExtra("idcategoria",10L);
+                            it5.putExtra("idcategoria",7L);
 
                             startActivity(it5);
                             break;
 
                         case 5:
                             Intent it6 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it6.putExtra("idcategoria",12L);
+                            it6.putExtra("idcategoria",6L);
 
                             startActivity(it6);
                             break;
 
                         case 6:
                             Intent it7 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it7.putExtra("idcategoria",10L);
+                            it7.putExtra("idcategoria",13L);
 
                             startActivity(it7);
                             break;
 
                         case 7:
                             Intent it8 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it8.putExtra("idcategoria",10L);
+                            it8.putExtra("idcategoria",6L);
 
                             startActivity(it8);
                             break;
 
                         case 8:
                             Intent it9 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it9.putExtra("idcategoria",12L);
+                            it9.putExtra("idcategoria",8L);
 
                             startActivity(it9);
                             break;
 
                         case 9:
                             Intent it10 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it10.putExtra("idcategoria",10L);
+                            it10.putExtra("idcategoria",7L);
 
                             startActivity(it10);
                             break;
