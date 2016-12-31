@@ -1,5 +1,6 @@
 package cardapiodigital.tecsoluction.com.cardapiodigital;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,7 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Categoria;
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
 import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonMesaActivity;
 import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonProdutoActivity;
+import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonPromocaoActivity;
 
 public class CardapioDigitalMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -119,6 +121,8 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
                             Intent it = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
                             it.putExtra("idcategoria",7L);
+                            it.putExtra("categoriaEscolhida",categoriaEscolhida);
+
                             startActivity(it);
 
                           //  Log.d("passou intent main",produtos.toString());
@@ -136,7 +140,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
                             Intent ittt = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
                             ittt.putExtra("idcategoria",6L);
-
+                            ittt.putExtra("categoriaEscolhida",categoriaEscolhida);
                             startActivity(ittt);
 
 //                            Intent itttt = new Intent(CardapioDigitalMainActivity.this, Sushi.class);
@@ -149,6 +153,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
                             Intent it3 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
                             it3.putExtra("idcategoria",7L);
+                            it3.putExtra("categoriaEscolhida",categoriaEscolhida);
 
                             startActivity(it3);
                             break;
@@ -156,6 +161,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 3:
                             Intent it4 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
                             it4.putExtra("idcategoria",6L);
+                            it4.putExtra("categoriaEscolhida",categoriaEscolhida);
 
                             startActivity(it4);
                             break;
@@ -163,6 +169,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 4:
                             Intent it5 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
                             it5.putExtra("idcategoria",7L);
+                            it5.putExtra("categoriaEscolhida",categoriaEscolhida);
 
                             startActivity(it5);
                             break;
@@ -246,15 +253,49 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        //
+
+
+
         int id = item.getItemId();
 
         Log.d("id navegation", String.valueOf(id));
 
+        //chamar garcon
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+
+
+
+            final ProgressDialog dialog = new ProgressDialog(CardapioDigitalMainActivity.this);
+            dialog.setMessage("Solicitando Garçon... Aguarde");
+            dialog.setIndeterminate(false);
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.setCancelable(true);
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.show();
+
+//
+
+//            AlertDialog.Builder builder = new AlertDialog.Builder(
+//                    CardapioDigitalMainActivity.this)
+//                    .setTitle("Solicitar Garcon")
+//                    .setMessage("Chamando Garçon !!")
+//                    .setPositiveButton("OK", null);
+//            builder.create().show();
+
+            //promocao
         } else if (id == R.id.nav_galleryy) {
 
+            Intent it = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonPromocaoActivity.class);
+            startActivity(it);
+
+            //logar
         } else if (id == R.id.nav_slideshow) {
+
+
+            startActivity(new Intent(getBaseContext(), MesasActivity.class));
+
+
 
         } else if (id == R.id.nav_manage) {
 
@@ -269,6 +310,8 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+      //  dialog.dismiss();
 
         return true;
     }

@@ -3,6 +3,7 @@ package cardapiodigital.tecsoluction.com.cardapiodigital;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Categoria;
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
 
 /**
@@ -20,7 +23,12 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
  */
 public class CustomSwipeAdapter extends PagerAdapter {
 
-    private int[] images_resources={R.drawable.refrigerante,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
+    private int[] images_resources_combos={R.drawable.barca,R.drawable.barca,R.drawable.barca,R.drawable.barca};
+    private int[] images_resources_bebidas={R.drawable.refrigerante,R.drawable.coca,R.drawable.coca,R.drawable.refrigerante};
+//    private int[] images_resources_sushi={R.drawable.refrigerante,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
+    private int[] images_resources_sobremesa={R.drawable.refrigerante,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
+    private int[] images_resources_sushi={R.drawable.coca,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
+    private int[] images_resources_temaki={R.drawable.sushi_back_g,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
 
     private Context contexo;
 
@@ -28,7 +36,11 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
     private List<Produto> listaProduto= null;
 
+    private List<Categoria> categorias;
 
+    private Categoria categoria;
+
+    private  String categoriaEscolhida="";
 
     //construtor
     public CustomSwipeAdapter(Context ctx){
@@ -38,10 +50,16 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
     }
 
-    public CustomSwipeAdapter(Context ctx, List<Produto> listaProd){
+    public String getCategoriaEscolhida() {
+        return categoriaEscolhida;
+    }
+
+    public CustomSwipeAdapter(Context ctx, List<Produto> listaProd, String categoriaEscolhida){
 
         this.contexo=ctx;
         this.listaProduto = listaProd;
+        this.categoriaEscolhida = categoriaEscolhida;
+
 
 
     }
@@ -69,7 +87,51 @@ public class CustomSwipeAdapter extends PagerAdapter {
         TextView descricao =(TextView)itemView.findViewById(R.id.txtprodutodescricao);
         TextView preco =(TextView)itemView.findViewById(R.id.txtprodutopreco);
 
+//        img.setImageResource("images_resources_"+categoriaEscolhida.toLowerCase()[position]);
 
+
+        Toast.makeText(container.getContext(),categoriaEscolhida+"ss",Toast.LENGTH_SHORT).show();
+
+        if ((categoriaEscolhida ==null)||(categoriaEscolhida=="")){
+            img.setImageResource(images_resources_bebidas[position]);
+
+            Log.d("categesco", "catescco null");
+
+
+        }
+
+        if (categoriaEscolhida == "COMBOS"){
+            img.setImageResource(images_resources_combos[position]);
+
+        }
+
+        if (categoriaEscolhida =="BEBIDAS"){
+            img.setImageResource(images_resources_bebidas[position]);
+
+        }
+
+        if (categoriaEscolhida =="SOBREMESAS"){
+            img.setImageResource(images_resources_sobremesa[position]);
+
+        }
+
+        if (categoriaEscolhida =="SUSHI"){
+            img.setImageResource(images_resources_sushi[position]);
+
+        }
+
+        if (categoriaEscolhida =="TEMAKIS"){
+            img.setImageResource(images_resources_temaki[position]);
+
+        }
+
+        Log.d("depois", "depois");
+
+
+        numero.setText(":"+ position);
+        descricao.setText(":" + listaProduto.get(position).getDescricao().toString());
+        preco.setText(":"+ listaProduto.get(position).getPrecoVenda());
+        container.addView(itemView);
 
 
         Button btAdd = (Button) itemView.findViewById(R.id.buttonAddPedido);
@@ -89,11 +151,10 @@ public class CustomSwipeAdapter extends PagerAdapter {
         Button btFechar = (Button) itemView.findViewById(R.id.buttonfecharpedido);
         Button btPromo = (Button) itemView.findViewById(R.id.buttonPromo);
 
-        img.setImageResource(images_resources[position]);
-        numero.setText(":"+ position);
-        descricao.setText(":" + listaProduto.get(position).getDescricao().toString());
-        preco.setText(":"+ listaProduto.get(position).getPrecoVenda());
-        container.addView(itemView);
+
+
+      img.setImageResource(images_resources_bebidas[position]);
+
 
 
         return itemView;

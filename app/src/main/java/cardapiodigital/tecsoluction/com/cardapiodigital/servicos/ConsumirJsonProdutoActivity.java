@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cardapiodigital.tecsoluction.com.cardapiodigital.Sushi;
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Categoria;
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
@@ -35,12 +36,18 @@ public class ConsumirJsonProdutoActivity extends Activity {
 
     private long idcategoria;
 
+    private String categoriaEscolhida;
+
+    private List<Categoria> listaCategoria = new ArrayList<Categoria>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         idcategoria = (Long) getIntent().getSerializableExtra("idcategoria");
+        categoriaEscolhida = (String) getIntent().getSerializableExtra("categoriaEscolhida");
+
         new DownloadJsonAsyncTask()
                 .execute("https://murmuring-waters-97180.herokuapp.com/produto/categoria/"+idcategoria);
     }
@@ -75,8 +82,32 @@ public class ConsumirJsonProdutoActivity extends Activity {
                     instream.close();
                     List<Produto> produtos = getProdutos(json);
 
+
+
+
+                    for (int i = 0; i < produtos.size(); i++) {
+
+                        Produto produto = new Produto();
+                        produto.setDescricao(produtos.get(i).getDescricao());
+                        produto.setNumero(produtos.get(i).getNumero());
+                        produto.setId(produtos.get(i).getId());
+                        produto.setCategoria(produtos.get(i).getCategoria());
+                        produto.setCodebar(produtos.get(i).getCodebar());
+                        produto.setPrecoVenda(produtos.get(i).getPrecoVenda());
+
+                        listaCategoria.add(produto.getCategoria());
+
+//                        Categoria  categoria = new Categoria();
+
+
+                    }
+
+
                     Intent intent = new Intent(ConsumirJsonProdutoActivity.this, Sushi.class);
                     intent.putExtra("produtos", (Serializable) produtos);
+                    intent.putExtra("categorias", (Serializable) listaCategoria);
+                    intent.putExtra("categoriaEscolhida", categoriaEscolhida);
+
                     finish();
                     startActivity(intent);
 

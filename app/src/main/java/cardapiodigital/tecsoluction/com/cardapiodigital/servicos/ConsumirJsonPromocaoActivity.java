@@ -1,12 +1,10 @@
 package cardapiodigital.tecsoluction.com.cardapiodigital.servicos;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,12 +15,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import cardapiodigital.tecsoluction.com.cardapiodigital.CardapioDigitalMainActivity;
-import cardapiodigital.tecsoluction.com.cardapiodigital.R;
-import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Categoria;
+import cardapiodigital.tecsoluction.com.cardapiodigital.PromocaoActivity;
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Promocao;
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -34,43 +32,31 @@ import static android.app.AlertDialog.Builder;
 /**
  * Created by winds on 17/12/2016.
  */
-public class ConsumirJsonCategoriaActivity extends Activity  {
-
-    ListView lstViewCat;
-
-    long catpai= 4L;
+public class ConsumirJsonPromocaoActivity extends Activity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         new DownloadJsonAsyncTask()
-                .execute("https://murmuring-waters-97180.herokuapp.com/categoria/pai/"+catpai);
-
-        setContentView(R.layout.activity_splash_json_categoria);
-
-
+                .execute("https://murmuring-waters-97180.herokuapp.com/promocao");
     }
 
 
-
-
-    class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Categoria>> {
-        ProgressDialog dialog;
+    class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Promocao>> {
+//        ProgressDialog dialog;
 
         //Exibe pop-up indicando que está sendo feito o download do JSON
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            dialog = ProgressDialog.show(ConsumirJsonCategoriaActivity.this, "Aguarde",
+//            dialog = ProgressDialog.show(ConsumirJsonGarconActivity.this, "Aguarde",
 //                    "Fazendo download do JSON");
         }
 
         //Acessa o serviço do JSON e retorna a lista de pessoas
         @Override
-        protected List<Categoria> doInBackground(String... params) {
+        protected List<Promocao> doInBackground(String... params) {
             String urlString = params[0];
             HttpClient httpclient = new DefaultHttpClient();
             HttpGet httpget = new HttpGet(urlString);
@@ -82,18 +68,18 @@ public class ConsumirJsonCategoriaActivity extends Activity  {
                     InputStream instream = entity.getContent();
                     String json = getStringFromInputStream(instream);
                     instream.close();
-                    List<Categoria> categorias = getCategoria(json);
+                    List<Promocao> promo = getPromocao(json);
 
-                    Intent intent = new Intent(ConsumirJsonCategoriaActivity.this, CardapioDigitalMainActivity.class);
-                    intent.putExtra("categorias", (Serializable) categorias);
-                    finish();
+                    Intent intent = new Intent(ConsumirJsonPromocaoActivity.this, PromocaoActivity.class);
+                    intent.putExtra("promo", (Serializable) promo);
                     startActivity(intent);
+                    finish();
 
 
-                    return categorias;
+                    return promo;
                 }
             } catch (Exception e) {
-                Log.e("Erro", "Falha ao acessar Web service", e);
+                Log.e("Erro", "Falha ao acessar Web service promocao", e);
             }
             return null;
         }
@@ -101,59 +87,51 @@ public class ConsumirJsonCategoriaActivity extends Activity  {
 
         //Depois de executada a chamada do serviço
         @Override
-        protected void onPostExecute(List<Categoria> result) {
+        protected void onPostExecute(List<Promocao> result) {
             super.onPostExecute(result);
 //            dialog.dismiss();
             if (result.size() > 0) {
-
-
+//                ArrayAdapter<Garcon> adapter = new ArrayAdapter<Garcon>(
+//                        ConsumirJsonPromocaoActivity.this,
+//                        android.R.layout.simple_list_item_1, result);
+//                setListAdapter(adapter);
             } else {
                 Builder builder = new Builder(
-                        ConsumirJsonCategoriaActivity.this)
-                        .setTitle("Erro CATEGORIA")
-                        .setMessage("Não foi possível acessar as informações!! CATEGORIA")
+                        ConsumirJsonPromocaoActivity.this)
+                        .setTitle("Erro")
+                        .setMessage("Não foi possível acessar as informações Promocao!!")
                         .setPositiveButton("OK", null);
                 builder.create().show();
             }
         }
 
         //Retorna uma lista de pessoas com as informações retornadas do JSON
-        public List<Categoria> getCategoria(String jsonString) throws JSONException {
-
-            List<Categoria> categorias = new ArrayList<Categoria>();
-
+        public List<Promocao> getPromocao(String jsonString) throws JSONException {
+            List<Promocao> promocoes = new ArrayList<Promocao>();
 
             try {
-                JSONArray categoriasJson = new JSONArray(jsonString);
-                JSONObject categoria;
+                JSONArray promocaoJson = new JSONArray(jsonString);
+                JSONObject promocao;
 
-                for (int i = 0; i < categoriasJson.length(); i++) {
-                    categoria = new JSONObject(categoriasJson.getString(i));
-                    Log.i("CATEGORIA ENCONTRADA: ",
-                            "nome=" + categoria.getString("nome"));
+                for (int i = 0; i < promocaoJson.length(); i++) {
+                    promocao = new JSONObject(promocaoJson.getString(i));
+                    Log.i("PROMOÇÃO ENCONTRADA: ",
+                            "nome=" + promocao.getString("nome"));
 
-//                    if(categoria.getString("nome")== ""){
-//
-//
-//                        Categoria objetoCategorianull= new Categoria();
-//                        objetoCategorianull.setNome("nome null");
-//                        categorias.add(objetoCategorianull);
-//
-//                    }
+                    Promocao objetoPromocao = new Promocao();
+                    objetoPromocao.setNome(promocao.getString("nome"));
+                    objetoPromocao.setNumero(promocao.getString("numero"));
+                    objetoPromocao.setDatainicio(Date.valueOf(promocao.getString("datainicio")));
+                    objetoPromocao.setDatafim(Date.valueOf(promocao.getString("datafim")));
 
-                    Categoria objetoCategoria= new Categoria();
-                    objetoCategoria.setNome(categoria.getString("nome"));
-                    //(categoria.getString("nome"));
-                  //  objetoCategoria.setProdutos(categoria.getString("produto")))
-                    //(categoria.getString("senha"));
-                    categorias.add(objetoCategoria);
+                    promocoes.add(objetoPromocao);
 
                 }
 
             } catch (JSONException e) {
-                Log.e("Erro", "Erro no parsing do JSON CATEGORIA", e);
+                Log.e("Erro", "Erro no parsing do JSON promocoes", e);
             }
-            return categorias;
+            return promocoes;
         }
 
 

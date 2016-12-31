@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageviewpromocao"
+        android:layout_marginRight="2sp"
+
+        />
+
+    <TextView
+        android:id="@+id/txtpromocaonumero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+    </TextView>
+
+
+
+
+    <TextView
+        android:id="@+id/txtpromocaonome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtpromocaodatainicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:inputType="date"
+        android:text=""
+        android:textColor="@color/colorPrimary">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtpromocaodatafim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:inputType="date"
+        android:text=""
+        android:textColor="@color/colorPrimary">
+
+    </TextView>
+
+
+</LinearLayout>

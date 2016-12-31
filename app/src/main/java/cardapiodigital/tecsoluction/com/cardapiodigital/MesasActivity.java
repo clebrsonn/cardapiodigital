@@ -3,11 +3,14 @@ package cardapiodigital.tecsoluction.com.cardapiodigital;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Mesa;
@@ -20,7 +23,7 @@ public class MesasActivity extends AppCompatActivity {
 
     Mesa mesa;
 
-    List<ImageView> imgViewMesaList;
+    List<ImageView>   imgViewMesaList = new ArrayList<ImageView>();
 
     ImageView  imgViewMesa;
 
@@ -50,19 +53,35 @@ public class MesasActivity extends AppCompatActivity {
 
         for (int i = 0; i < mesas.size(); i++) {
 
+            mesa = new Mesa();
 
             imgViewMesa = new ImageView(this);
             imgViewMesa.setImageResource(images_resources[i]);
             imgViewMesa.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
           //  imgViewMesa.setId((int) Long.parseLong("mesa"+i));
-
+            imgViewMesaList.add(imgViewMesa);
             layout.addView(imgViewMesa);
 //            layout2.addView(imgViewMesa);
 
 
             Log.d("mesa:-",mesas.get(i).getNumero());
 
-//            imgViewMesaList.add(imgViewMesa);
+            mesa.setId(mesas.get(i).getId());
+            mesa.setNumero(mesas.get(i).getNumero());
+            mesa.setStatus(mesas.get(i).getStatus());
+
+
+            final int finalI = i;
+            imgViewMesa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Toast.makeText(getBaseContext(),"Mesa:"+ mesas.get(finalI).getNumero(),Toast.LENGTH_SHORT).show();
+
+
+
+                }
+            });
 
         }
 
