@@ -26,7 +26,7 @@ public class CustomSwipeAdapter extends PagerAdapter {
     private int[] images_resources_combos={R.drawable.barca,R.drawable.barca,R.drawable.barca,R.drawable.barca};
     private int[] images_resources_bebidas={R.drawable.refrigerante,R.drawable.coca,R.drawable.coca,R.drawable.refrigerante};
 //    private int[] images_resources_sushi={R.drawable.refrigerante,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
-    private int[] images_resources_sobremesa={R.drawable.refrigerante,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
+    private int[] images_resources_sobremesa={R.drawable.barca,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
     private int[] images_resources_sushi={R.drawable.coca,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
     private int[] images_resources_temaki={R.drawable.sushi_back_g,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
 
@@ -90,39 +90,43 @@ public class CustomSwipeAdapter extends PagerAdapter {
 //        img.setImageResource("images_resources_"+categoriaEscolhida.toLowerCase()[position]);
 
 
-        Toast.makeText(container.getContext(),categoriaEscolhida+"ss",Toast.LENGTH_SHORT).show();
+        Toast.makeText(container.getContext(),categoriaEscolhida+"",Toast.LENGTH_SHORT).show();
 
-        if ((categoriaEscolhida ==null)||(categoriaEscolhida=="")){
+        if ((categoriaEscolhida == null)||(categoriaEscolhida=="")){
             img.setImageResource(images_resources_bebidas[position]);
 
             Log.d("categesco", "catescco null");
 
 
-        }
+        }else {
 
-        if (categoriaEscolhida == "COMBOS"){
-            img.setImageResource(images_resources_combos[position]);
+            if (categoriaEscolhida.equals("COMBOS") ){
+                img.setImageResource(images_resources_combos[position]);
+                Log.d("combo", "combo passou");
 
-        }
+            }
 
-        if (categoriaEscolhida =="BEBIDAS"){
-            img.setImageResource(images_resources_bebidas[position]);
+            if (categoriaEscolhida.equals("BEBIDAS")) {
+                img.setImageResource(images_resources_bebidas[position]);
+                Log.d("bebidas", " bebidas");
+            }
 
-        }
+            if (categoriaEscolhida.equals("SOBREMESAS")) {
+                img.setImageResource(images_resources_sobremesa[position]);
+                Log.d("SOBREMESAS", " SOBREMESAS");
+            }
 
-        if (categoriaEscolhida =="SOBREMESAS"){
-            img.setImageResource(images_resources_sobremesa[position]);
+            if (categoriaEscolhida.equals("SUSHI")) {
+                img.setImageResource(images_resources_sushi[position]);
+                Log.d("SUSHI", "SUSHI");
+            }
 
-        }
+            if (categoriaEscolhida.equals("TEMAKIS")) {
+                img.setImageResource(images_resources_temaki[position]);
+                Log.d("TEMAKIS", "TEMAKIS");
+            }
 
-        if (categoriaEscolhida =="SUSHI"){
-            img.setImageResource(images_resources_sushi[position]);
-
-        }
-
-        if (categoriaEscolhida =="TEMAKIS"){
-            img.setImageResource(images_resources_temaki[position]);
-
+            Log.d("else", "else");
         }
 
         Log.d("depois", "depois");
@@ -153,7 +157,7 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
 
 
-      img.setImageResource(images_resources_bebidas[position]);
+//      img.setImageResource(images_resources_bebidas[position]);
 
 
 

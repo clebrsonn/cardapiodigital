@@ -17,7 +17,7 @@
 
     <ImageView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:id="@+id/imageviewproduto"
         android:layout_marginRight="2sp"
 
@@ -27,23 +27,25 @@
         android:id="@+id/txtprodutodescricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sushi [suchí][1] [2] (em japonês: 寿司, 鮨 ou 鮓) é um prato da culinária japonesa que possui origem numa antiga técnica de conservação da carne de peixe em arroz avinagrado. O sushi, na forma em que é conhecido atualmente, tem cerca de 200 anos; inicialmente, era vendido em barracas, como comida de rua, numa espécie de fast food.">
-
+        android:textSize="20dp"
+        android:layout_gravity="center">
     </TextView>
 
     <TextView
         android:id="@+id/txtprodutopreco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:layout_gravity="end"
-        android:text="R$:7,90"
-        android:textColor="@color/colorPrimary">
+        android:textSize="30dp"
+        android:textColor="@color/verde"
+        >
+
+        <!--android:layout_gravity="end"-->
+
 
     </TextView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/lin">
@@ -52,20 +54,22 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="Add Pedido"
         android:id="@+id/buttonAddPedido"
-        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/gradiente_botao"
+        android:textColor="@color/white"
         android:layout_margin="10dp"
         android:onClick="AddPedido()"
         />
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="Fechar Pedido"
+        android:background="@drawable/gradiente_botao"
         android:id="@+id/buttonfecharpedido"
         android:layout_margin="10dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:onClick="FecharPedido"
 
 
@@ -74,13 +78,13 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="Ver Pedido"
         android:id="@+id/buttonPromo"
+        android:background="@drawable/gradiente_botao"
         android:layout_margin="10dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:onClick="verPedido"
-
 
         />
 
