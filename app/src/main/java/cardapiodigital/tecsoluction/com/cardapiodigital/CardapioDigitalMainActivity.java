@@ -111,8 +111,8 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 //
 //                Log.d("idcategoria",ide);
 
-                Toast.makeText(CardapioDigitalMainActivity.this, "Categoria:" + categoriaEscolhida, Toast.LENGTH_LONG).show();
-                {
+                    Toast.makeText(CardapioDigitalMainActivity.this, "Categoria:" + categoriaEscolhida, Toast.LENGTH_LONG).show();
+
 
 
                     switch (position) {
@@ -212,7 +212,6 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
                     }
 
-                }
             }
         });
     }
