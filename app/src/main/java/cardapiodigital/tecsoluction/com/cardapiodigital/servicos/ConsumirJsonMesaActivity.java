@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -14,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +71,7 @@ public class ConsumirJsonMesaActivity extends Activity {
                     List<Mesa> mesas = getMesas(json);
 
                     Intent intent = new Intent(ConsumirJsonMesaActivity.this, MesasActivity.class);
-                    intent.putExtra("mesas", (Serializable) mesas);
+                    intent.putParcelableArrayListExtra("mesas", (ArrayList<? extends Parcelable>) mesas);
                     finish();
                     startActivity(intent);
 
@@ -101,7 +101,7 @@ public class ConsumirJsonMesaActivity extends Activity {
                         .setTitle("Erro")
                         .setMessage("Não foi possível acessar as informações Mesa!!")
                         .setPositiveButton("OK", null);
-                builder.create().show();
+                        builder.create().show();
             }
         }
 

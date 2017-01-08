@@ -1,7 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="cardapiodigital.tecsoluction.com.cardapiodigital.MesaFragment">
 
     <!--<com.google.android.gms.plus.PlusOneButton xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"-->
@@ -11,14 +12,31 @@
         <!--plus:annotation="inline"-->
         <!--plus:size="standard" />-->
 
-    <ListView
-        android:id="@+id/lstitensmesa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/azul">
+
+        <TextView
+        android:id="@+id/txttestefragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+            android:text="@string/action_settings">
 
 
-    </ListView>
+        </TextView>
+
+
+    </LinearLayout>
+
+    <!--<ListView-->
+        <!--android:id="@+id/lstitensmesa"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
+
+
+    <!--</ListView>-->
 
 
 
-</FrameLayout>
+</LinearLayout>

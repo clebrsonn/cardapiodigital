@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -14,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +71,7 @@ public class ConsumirJsonPromocaoActivity extends Activity {
                     List<Promocao> promo = getPromocao(json);
 
                     Intent intent = new Intent(ConsumirJsonPromocaoActivity.this, PromocaoActivity.class);
-                    intent.putExtra("promo", (Serializable) promo);
+                    intent.putParcelableArrayListExtra("promo", (ArrayList<? extends Parcelable>) promo);
                     startActivity(intent);
                     finish();
 
@@ -119,6 +119,7 @@ public class ConsumirJsonPromocaoActivity extends Activity {
                             "nome=" + promocao.getString("nome"));
 
                     Promocao objetoPromocao = new Promocao();
+                    objetoPromocao.setId(promocao.getLong("id"));
                     objetoPromocao.setNome(promocao.getString("nome"));
                     objetoPromocao.setNumero(promocao.getString("numero"));
                     objetoPromocao.setDatainicio(Date.valueOf(promocao.getString("datainicio")));

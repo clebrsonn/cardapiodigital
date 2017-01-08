@@ -20,7 +20,7 @@ public class PromocaoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.promocao_activity);
 
-        promocoes  = (List<Promocao>) getIntent().getSerializableExtra("promo");
+        promocoes  = getIntent().getParcelableArrayListExtra("promo");
 
 
         viewpager = (ViewPager) findViewById(R.id.viewpagepromocao);

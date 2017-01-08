@@ -1,12 +1,11 @@
 package cardapiodigital.tecsoluction.com.cardapiodigital.servicos;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +34,10 @@ import static android.app.AlertDialog.Builder;
  */
 public class ConsumirJsonCategoriaActivity extends Activity  {
 
-    ListView lstViewCat;
 
     long catpai= 4L;
+
+//    Categoria categoria = new Categoria();
 
 
     @Override
@@ -58,7 +57,7 @@ public class ConsumirJsonCategoriaActivity extends Activity  {
 
 
     class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Categoria>> {
-        ProgressDialog dialog;
+//        ProgressDialog dialog;
 
         //Exibe pop-up indicando que está sendo feito o download do JSON
         @Override
@@ -82,10 +81,12 @@ public class ConsumirJsonCategoriaActivity extends Activity  {
                     InputStream instream = entity.getContent();
                     String json = getStringFromInputStream(instream);
                     instream.close();
-                    List<Categoria> categorias = getCategoria(json);
+                    List<Categoria> categorias=null;
+                    categorias = getCategoria(json);
+
 
                     Intent intent = new Intent(ConsumirJsonCategoriaActivity.this, CardapioDigitalMainActivity.class);
-                    intent.putExtra("categorias", (Serializable) categorias);
+                    intent.putParcelableArrayListExtra("categorias", (ArrayList<? extends Parcelable>) categorias);
                     finish();
                     startActivity(intent);
 
@@ -142,7 +143,10 @@ public class ConsumirJsonCategoriaActivity extends Activity  {
 //                    }
 
                     Categoria objetoCategoria= new Categoria();
+                    objetoCategoria.setId(categoria.getLong("id"));
                     objetoCategoria.setNome(categoria.getString("nome"));
+//                    objetoCategoria.setCatpai(categoria.get("nome"));
+
                     //(categoria.getString("nome"));
                   //  objetoCategoria.setProdutos(categoria.getString("produto")))
                     //(categoria.getString("senha"));

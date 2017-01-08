@@ -14,8 +14,8 @@ import android.view.View;
 import android.widget.GridLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -26,29 +26,67 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Mesa;
 public class MesasActivity extends AppCompatActivity implements MesaFragment.OnFragmentInteractionListener,NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
 
-    List<Mesa> mesas;
+    List<Mesa> mesas = null;
 
     Mesa mesa;
 
-    MesaFragment mesafragmento = new MesaFragment();
+//    MesaFragment mesafragmento = new MesaFragment();
+//
+    Fragment fragmentomesa = null;
+//
+//    public Fragment getFragmentomesa() {
+//        return fragmentomesa;
+//    }
+//
+    public android.support.v4.app.FragmentTransaction fragTransact;
 
-    Fragment fragmentomesa = new Fragment();
+     ScrollView sv = null;
 
-    public Fragment getFragmentomesa() {
-        return fragmentomesa;
-    }
+      HorizontalScrollView hsv = null;
 
-    public FragmentTransaction fragTransact;
+    GridLayout gl = null;
+
+    ImageView imgmesa;
+
+    TextView tx = null;
+
+    MesaFragment fragment=null;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.mesas_activity);
+        setContentView(R.layout.mesas_activity);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+//        toolbarsetSupportActionBar(toolbar);
 
-        mesas = (List<Mesa>) getIntent().getSerializableExtra("mesas");
+        mesas = getIntent().getParcelableArrayListExtra("mesas");
+
+        mesa = getIntent().getParcelableExtra("mesa");
+
+        sv = (ScrollView)findViewById(R.id.sv);
+
+        hsv = (HorizontalScrollView)findViewById(R.id.hsv);
+
+        gl = (GridLayout)findViewById(R.id.gl);
+
+        imgmesa = (ImageView) findViewById(R.id.imgmesa);
+
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        fragTransact = fm.beginTransaction();
+
+
+//
+         fragment = MesaFragment.newInstance(mesa);
+//
+//
+        fragTransact.replace(R.id.lay,fragment);
+        fragTransact.hide(fragment);
+        fragTransact.commit();
+
+        tx = (TextView) findViewById(R.id.txttestefragment);
 
 //        fragTransact = getFragmentManager().beginTransaction();
 
@@ -77,34 +115,33 @@ public class MesasActivity extends AppCompatActivity implements MesaFragment.OnF
 //                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 //        drawer.setDrawerListener(toggle);
 //        toggle.syncState();
-//
+
 //        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(this);
 
 
-        final ScrollView sv = new ScrollView(this);
+//        final ScrollView sv = new ScrollView(this);
 //        sv.setHorizontalScrollBarEnabled(true);
 //        sv.fullScroll(ScrollView.TEXT_DIRECTION_FIRST_STRONG_RTL);
-        sv.arrowScroll(2);
+//        sv.arrowScroll(2);
 
 //        sv.setOverScrollMode( );
-        LinearLayout.LayoutParams lpsv = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//        LinearLayout.LayoutParams lpsv = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 //        sv.setLayoutParams(lpsv);
 
 
 //        sv.setScrollBarSize(View.SCROLLBARS_INSIDE_OVERLAY);
 
-        final HorizontalScrollView hsv = new HorizontalScrollView(this);
+//        final HorizontalScrollView hsv = new HorizontalScrollView(this);
 
-        hsv.setLayoutParams(lpsv);
+//        hsv.setLayoutParams(lpsv);
+//
+//        sv.addView(hsv);
 
-        sv.addView(hsv);
 
+//        final GridLayout gl = new GridLayout(this);
 
-        GridLayout gl = new GridLayout(this);
-        gl.getCameraDistance();
-
-            hsv.addView(gl);
+//            hsv.addView(gl);
 
 
         for (int i = 0; i < mesas.size(); i++) {
@@ -166,7 +203,7 @@ public class MesasActivity extends AppCompatActivity implements MesaFragment.OnF
 
                 } //indisponivel
 
-                mesa = new Mesa();
+           final Mesa mesa = new Mesa();
 
 
                 Log.d("mesa:-", mesas.get(j).getNumero());
@@ -186,7 +223,63 @@ public class MesasActivity extends AppCompatActivity implements MesaFragment.OnF
 
 
 
+                        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+
+//                        MesaFragment fragment = MesaFragment.newInstance(mesa);
+
+                        fragTransact = fm.beginTransaction();
+
+
+                        if(fragment.isVisible()){
+
+                            Log.d("fragment is visible", String.valueOf(fragment.isVisible()));
+                            fragTransact.replace(R.id.lay,fragment);
+                            fragTransact.hide(fragment);
+                            fragTransact.commit();
+
+                        }if(fragment.isHidden()){
+
+                            Log.d("fragment is hidden", String.valueOf(fragment.isHidden()));
+                            fragTransact.replace(R.id.lay,fragment);
+                            fragTransact.show(fragment);
+                            fragTransact.commit();
+
+
+                        }
+
+//        fragmentomesa = (Fragment) getFragmentManager().findFragmentById(R.id.fragmesa);
+
+
+
+
+
+
+
+//                        FragmentTransaction fragTransact2 = getFragmentManager().beginTransaction();
+//
+//
+//                        fragTransact2.replace(R.id.content_mesas,fragmentomesa);
+//
+//                            fragTransact2.commit();
+//
+
+//                        fragTransact = getFragmentManager().beginTransaction();
+//
+//                        if(fragmentomesa.isVisible()){
+//
+//                            fragTransact.hide(fragmentomesa);
+//                        }else{
+//
+//                            fragTransact.show(fragmentomesa);
+//                        }
+//
+//                        fragTransact.commit();
+
+
+
                     }
+
+
                 });
 
 
@@ -196,8 +289,13 @@ public class MesasActivity extends AppCompatActivity implements MesaFragment.OnF
 
         }//i
 
+//        fragTransact.commit();
+
+
 //        layoutLinear.addView(sv);
-        setContentView(sv);
+//        setContentView(sv);
+
+//        fragTransact.commit();
 
     } //oncreate
 
@@ -217,12 +315,25 @@ public class MesasActivity extends AppCompatActivity implements MesaFragment.OnF
     public void onClick(View view) {
         Log.d("antesFragment", "antes");
 
+       FragmentTransaction fragTransact2 = getFragmentManager().beginTransaction();
+
         switch (view.getId()) {
 
-            case R.drawable.mesa_on:
+            case R.id.imgmesa:
 //                Log.d("windson dentu Fragment", "wind  fab frag0");
-                Toast.makeText(view.getContext(),
-                        "Mesa Disponivel!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(),
+//                        "Mesa Disponivel!", Toast.LENGTH_SHORT).show();
+//
+//                if(fragmentomesa.isVisible()){
+//
+//                    fragTransact2.hide(fragmentomesa);
+//                }else{
+//
+//                    fragTransact2.show(fragmentomesa);
+//                }
+//
+//                fragTransact2.commit();
+
                 break;
 
 

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Produto;
 public class CustomSwipeAdapter extends PagerAdapter {
 
     private int[] images_resources_combos={R.drawable.barca,R.drawable.barca,R.drawable.barca,R.drawable.barca};
-    private int[] images_resources_bebidas={R.drawable.refrigerante,R.drawable.coca,R.drawable.coca,R.drawable.refrigerante};
+    private int[] images_resources_bebidas={R.drawable.coca,R.drawable.refrigerante,R.drawable.coca,R.drawable.refrigerante};
 //    private int[] images_resources_sushi={R.drawable.refrigerante,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
     private int[] images_resources_sobremesa={R.drawable.barca,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
     private int[] images_resources_sushi={R.drawable.coca,R.drawable.barca,R.drawable.coca,R.drawable.sushi_back_g};
@@ -38,9 +37,9 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
     private List<Categoria> categorias;
 
-    private Categoria categoria;
+    private Categoria categoria =  new Categoria();
 
-    private  String categoriaEscolhida="";
+//    private  String categoriaEscolhida="";
 
     //construtor
     public CustomSwipeAdapter(Context ctx){
@@ -50,15 +49,15 @@ public class CustomSwipeAdapter extends PagerAdapter {
 
     }
 
-    public String getCategoriaEscolhida() {
-        return categoriaEscolhida;
-    }
+//    public String getCategoriaEscolhida() {
+//        return categoriaEscolhida;
+//    }
 
-    public CustomSwipeAdapter(Context ctx, List<Produto> listaProd, String categoriaEscolhida){
+    public CustomSwipeAdapter(Context ctx, List<Produto> listaProd,Categoria categoria){
 
         this.contexo=ctx;
         this.listaProduto = listaProd;
-        this.categoriaEscolhida = categoriaEscolhida;
+        this.categoria = categoria;
 
 
 
@@ -90,41 +89,48 @@ public class CustomSwipeAdapter extends PagerAdapter {
 //        img.setImageResource("images_resources_"+categoriaEscolhida.toLowerCase()[position]);
 
 
-        Toast.makeText(container.getContext(),categoriaEscolhida+"",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(container.getContext(),categoriaEscolhida+"",Toast.LENGTH_SHORT).show();
 
-        if ((categoriaEscolhida == null)||(categoriaEscolhida=="")){
+        if ((categoria.getNome() == null)||(categoria.getNome()=="")){
             img.setImageResource(images_resources_bebidas[position]);
 
-            Log.d("categesco", "catescco null");
+            Log.d("categoria nulla", "categoria nulla");
 
 
         }else {
 
-            if (categoriaEscolhida.equals("COMBOS") ){
+            if (categoria.getNome().equals("COMBOS") ){
                 img.setImageResource(images_resources_combos[position]);
                 Log.d("combo", "combo passou");
 
             }
 
-            if (categoriaEscolhida.equals("BEBIDAS")) {
+            if (categoria.getNome().equals("BEBIDAS")) {
                 img.setImageResource(images_resources_bebidas[position]);
                 Log.d("bebidas", " bebidas");
             }
 
-            if (categoriaEscolhida.equals("SOBREMESAS")) {
+            if (categoria.getNome().equals("SOBREMESAS")) {
                 img.setImageResource(images_resources_sobremesa[position]);
                 Log.d("SOBREMESAS", " SOBREMESAS");
             }
 
-            if (categoriaEscolhida.equals("SUSHI")) {
+            if (categoria.getNome().equals("SUSHI")) {
                 img.setImageResource(images_resources_sushi[position]);
                 Log.d("SUSHI", "SUSHI");
             }
 
-            if (categoriaEscolhida.equals("TEMAKIS")) {
+            if (categoria.getNome().equals("TEMAKIS")) {
                 img.setImageResource(images_resources_temaki[position]);
                 Log.d("TEMAKIS", "TEMAKIS");
             }
+
+            if (categoria.getNome().equals("petisco")) {
+                img.setImageResource(images_resources_temaki[position]);
+                Log.d("PETISCO", "PETISCO");
+            }
+
+
 
             Log.d("else", "else");
         }

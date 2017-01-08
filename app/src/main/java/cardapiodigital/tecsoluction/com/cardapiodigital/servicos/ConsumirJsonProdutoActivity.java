@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -14,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,35 +34,38 @@ import static android.app.AlertDialog.Builder;
  */
 public class ConsumirJsonProdutoActivity extends Activity {
 
-    private long idcategoria;
-
-    private String categoriaEscolhida;
 
     private List<Categoria> listaCategoria = new ArrayList<Categoria>();
 
+    private Categoria categoria = new Categoria();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        idcategoria = (Long) getIntent().getSerializableExtra("idcategoria");
-        categoriaEscolhida = (String) getIntent().getSerializableExtra("categoriaEscolhida");
+//        idcategoria = (Long) getIntent().getSerializableExtra("idcategoria");
+//        categoriaEscolhida = (String) getIntent().getSerializableExtra("categoriaEscolhida");
+
+        categoria = getIntent().getParcelableExtra("categoria");
+//        long categoriaId = getIntent().getParcelableExtra("categoria");;
+
+        Log.d("categoriaId", String.valueOf(categoria.getId()));
 
         new DownloadJsonAsyncTask()
-                .execute("https://murmuring-waters-97180.herokuapp.com/produto/categoria/"+idcategoria);
+                .execute("https://murmuring-waters-97180.herokuapp.com/produto/categoria/"+categoria.getId());
     }
 
 
 
     class DownloadJsonAsyncTask extends AsyncTask<String, Void, List<Produto>> {
 
-      //  ProgressDialog dialog;
+//        ProgressDialog dialog;
 
         //Exibe pop-up indicando que está sendo feito o download do JSON
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            dialog = ProgressDialog.show(ConsumirJsonGarconActivity.this, "Aguarde",
+//            dialog = ProgressDialog.show(ConsumirJsonProdutoActivity.this, "Aguarde",
 //                    "Fazendo download do JSON");
         }
 
@@ -104,9 +107,9 @@ public class ConsumirJsonProdutoActivity extends Activity {
 
 
                     Intent intent = new Intent(ConsumirJsonProdutoActivity.this, Sushi.class);
-                    intent.putExtra("produtos", (Serializable) produtos);
-                    intent.putExtra("categorias", (Serializable) listaCategoria);
-                    intent.putExtra("categoriaEscolhida", categoriaEscolhida);
+                    intent.putParcelableArrayListExtra("produtos", (ArrayList<? extends Parcelable>) produtos);
+                    intent.putParcelableArrayListExtra("categorias",(ArrayList<? extends Parcelable>) listaCategoria);
+                    intent.putExtra("categoriaEscolhida", categoria);
 
                     finish();
                     startActivity(intent);
@@ -159,7 +162,7 @@ public class ConsumirJsonProdutoActivity extends Activity {
                     objetoProduto.setCodebar(produto.getString("codebar"));
                     objetoProduto.setDescricao(produto.getString("descricao"));
                     objetoProduto.setPrecoVenda(produto.getDouble("precoVenda"));
-                  //  objetoProduto.setCategoria(produto.get("categoria"));
+//                    objetoProduto.setCategoria(produto.getString("categoria"));
                     produtos.add(objetoProduto);
 
                 }

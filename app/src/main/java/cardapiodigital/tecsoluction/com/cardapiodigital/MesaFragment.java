@@ -7,14 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+
+import com.google.android.gms.plus.PlusOneButton;
 
 import java.util.List;
 
 import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Item;
+import cardapiodigital.tecsoluction.com.cardapiodigital.entidade.Mesa;
 
 /**
  * A fragment with a Google +1 button.
@@ -36,13 +35,12 @@ public class MesaFragment extends Fragment {
     // TODO: Rename and change types of parameters
 //    private String mParam1;
 //    private String mParam2;
-//    private PlusOneButton mPlusOneButton;
+    private PlusOneButton mPlusOneButton;
 
     private OnFragmentInteractionListener mListener;
 
     List<Item> itens;
 
-    MesaFragment mesafra;
 
     public MesaFragment() {
         // Required empty public constructor
@@ -50,9 +48,10 @@ public class MesaFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static Fragment newInstance() {
-        Fragment fragment = new Fragment();
+    public static MesaFragment newInstance(Mesa mesa) {
+        MesaFragment fragment = new MesaFragment();
         Bundle args = new Bundle();
+        args.putParcelable("mesa",mesa);
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,33 +77,33 @@ public class MesaFragment extends Fragment {
 //        navigationView.setNavigationItemSelectedListener(this);
 
 
-        final ListView lstviewfragmentomesa = (ListView)view.findViewById(R.id.lstitensmesa);
-
-
-        final List<Item> listaitemarray;
-        //chamando funcao para preencher a lista
-        listaitemarray = preencherDados();
-
-        //associando o adapter a um layout e passando por parametro a lista
-        ArrayAdapter<Item> arrayadapter = new ArrayAdapter<Item>(container.getContext(),android.R.layout.simple_list_item_1,listaitemarray);
-        lstviewfragmentomesa.setAdapter(arrayadapter);
-        // botão de apbir pedido
-//          Button bt =(Button)findViewById(R.id.mesa);
-
-        //  final para poder passar por parametro no toast
-        final List<Item> finalListaitemarray = listaitemarray;
-
-        lstviewfragmentomesa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String row_choose = finalListaitemarray.get(i).toString();
-
-                Toast.makeText(view.getContext(), "Mesa Fragment:" + row_choose, Toast.LENGTH_LONG).show();
-
-
-            }
-        }) ;
+//        final ListView lstviewfragmentomesa = (ListView)view.findViewById(R.id.lstitensmesa);
+//
+//
+//        final List<Item> listaitemarray;
+//        //chamando funcao para preencher a lista
+//        listaitemarray = preencherDados();
+//
+//        //associando o adapter a um layout e passando por parametro a lista
+//        ArrayAdapter<Item> arrayadapter = new ArrayAdapter<Item>(container.getContext(),android.R.layout.simple_list_item_1,listaitemarray);
+//        lstviewfragmentomesa.setAdapter(arrayadapter);
+//        // botão de apbir pedido
+////          Button bt =(Button)findViewById(R.id.mesa);
+//
+//        //  final para poder passar por parametro no toast
+//        final List<Item> finalListaitemarray = listaitemarray;
+//
+//        lstviewfragmentomesa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                String row_choose = finalListaitemarray.get(i).toString();
+//
+//                Toast.makeText(view.getContext(), "Mesa Fragment:" + row_choose, Toast.LENGTH_LONG).show();
+//
+//
+//            }
+//        }) ;
 
 
         return view;

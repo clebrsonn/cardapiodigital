@@ -2,6 +2,7 @@ package cardapiodigital.tecsoluction.com.cardapiodigital;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -28,7 +29,7 @@ import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonMes
 import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonProdutoActivity;
 import cardapiodigital.tecsoluction.com.cardapiodigital.servicos.ConsumirJsonPromocaoActivity;
 
-public class CardapioDigitalMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class CardapioDigitalMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,MesaFragment.OnFragmentInteractionListener {
 
         Categoria categoria;
         List<Categoria> categorias=null;
@@ -43,10 +44,9 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 
         setContentView(R.layout.activity_main_cardapio_digital);
 
-        categoria = (Categoria) getIntent().getSerializableExtra("categoria");
-        categorias= (List<Categoria>) getIntent().getSerializableExtra("categorias");
-
-        produtos = (List<Produto>) getIntent().getSerializableExtra("produtos");
+//        categoria = getIntent().getParcelableExtra("categoria");
+        categorias= getIntent().getParcelableArrayListExtra("categorias");
+        produtos =  getIntent().getParcelableArrayListExtra("produtos");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,7 +77,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        ListView listCategoria = (ListView) findViewById(R.id.lst_categoria);
+        final ListView listCategoria = (ListView) findViewById(R.id.lst_categoria);
         //arraayadapter para lista
         final List<Categoria> listacategoriaarray;
         //chamando funcao para preencher a lista
@@ -94,22 +94,26 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
         listCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
-//            garconadapter = new GarconAdapter(, null);
-//            listview.setAdapter(garconadapter);
-
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+//               long idcategoria = listCategoria.getSelectedItemId();
+
+                        Categoria categoriaa = new Categoria();
+                        categoriaa = finalListacategoriaarray.get(position);
+//                        categoriaa.setId(finalListacategoriaarray.get(position).getId());
+//                        categoriaa.setNome(finalListacategoriaarray.get(position).getNome());
+//                        categoriaa.setCatpai(finalListacategoriaarray.get(position).getCatpai());
+
                 String categoriaEscolhida = finalListacategoriaarray.get(position).toString();
 
-                Log.d("finalcategoria",categoriaEscolhida);
+                Long idcategoriaescolhida = finalListacategoriaarray.get(position).getId();
 
-  //              long idcategoria = listacategoriaarray.get(position).getId();
-//
-//                String ide = String.valueOf(idcategoria);
-//
-//                Log.d("idcategoria",ide);
+                Log.d("finalcategoria",categoriaEscolhida);
+                Log.d("categoria", String.valueOf(categoriaa.getId()));
+
+//                Log.d("idcategoria", String.valueOf(finalListacategoriaarray.get(position).getId()));
 
                     Toast.makeText(CardapioDigitalMainActivity.this, "Categoria:" + categoriaEscolhida, Toast.LENGTH_LONG).show();
 
@@ -120,18 +124,11 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 0:
 
                             Intent it = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it.putExtra("idcategoria",7L);
-                            it.putExtra("categoriaEscolhida",categoriaEscolhida);
+                            it.putExtra("categoria",categoriaa);
+//                            it.putExtra("categoriaEscolhida",categoriaEscolhida);
 
                             startActivity(it);
 
-                          //  Log.d("passou intent main",produtos.toString());
-
-//                            Intent itt = new Intent(CardapioDigitalMainActivity.this, Sushi.class);
-//                            itt.putExtra("produtos", (Serializable) produtos);
-//                            startActivity(itt);
-//
-//                            Log.d("passou intent2 main",produtos.toString());
 
                             break;
 
@@ -139,72 +136,74 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
                         case 1:
 
                             Intent ittt = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            ittt.putExtra("idcategoria",6L);
-                            ittt.putExtra("categoriaEscolhida",categoriaEscolhida);
+//                            ittt.putExtra("idcategoria",6L);
+//                            ittt.putExtra("categoriaEscolhida",categoriaEscolhida);
+
+                            ittt.putExtra("categoria",categoriaa);
+
                             startActivity(ittt);
 
-//                            Intent itttt = new Intent(CardapioDigitalMainActivity.this, Sushi.class);
-//                            itttt.putExtra("produtos", (Serializable) produtos);
-//                            startActivity(itttt);
                             break;
 
 
                         case 2:
 
                             Intent it3 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it3.putExtra("idcategoria",7L);
-                            it3.putExtra("categoriaEscolhida",categoriaEscolhida);
+                            it3.putExtra("categoria",categoriaa);
+
 
                             startActivity(it3);
                             break;
 
                         case 3:
                             Intent it4 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it4.putExtra("idcategoria",6L);
-                            it4.putExtra("categoriaEscolhida",categoriaEscolhida);
+                            it4.putExtra("categoria",categoriaa);
+
 
                             startActivity(it4);
                             break;
 
                         case 4:
                             Intent it5 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it5.putExtra("idcategoria",7L);
-                            it5.putExtra("categoriaEscolhida",categoriaEscolhida);
+                            it5.putExtra("categoria",categoriaa);
+
 
                             startActivity(it5);
                             break;
 
                         case 5:
                             Intent it6 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it6.putExtra("idcategoria",6L);
+                            it6.putExtra("categoria",categoriaa);
+
 
                             startActivity(it6);
                             break;
 
                         case 6:
                             Intent it7 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it7.putExtra("idcategoria",13L);
+                            it7.putExtra("categoria",categoriaa);
 
                             startActivity(it7);
                             break;
 
                         case 7:
                             Intent it8 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it8.putExtra("idcategoria",6L);
+                            it8.putExtra("categoria",categoriaa);
 
                             startActivity(it8);
                             break;
 
                         case 8:
                             Intent it9 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it9.putExtra("idcategoria",8L);
+                            it9.putExtra("categoria",categoriaa);
+
 
                             startActivity(it9);
                             break;
 
                         case 9:
                             Intent it10 = new Intent(CardapioDigitalMainActivity.this, ConsumirJsonProdutoActivity.class);
-                            it10.putExtra("idcategoria",7L);
+                            it10.putExtra("categoria",categoriaa);
 
                             startActivity(it10);
                             break;
@@ -324,7 +323,7 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
 //        g2.setSenhagarcon("14gfdd52");
 
 //
-  //      categorias = (List<Categoria>) getIntent().getSerializableExtra("categorias");
+        categorias =  getIntent().getParcelableArrayListExtra("categorias");
 
 //        List<Garcon> lista = new ArrayList<>();
 ////
@@ -336,4 +335,8 @@ public class CardapioDigitalMainActivity extends AppCompatActivity implements Na
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
